@@ -1,3 +1,31 @@
+//Wishimg Good luck to the user
+let username = localStorage.getItem('username');
+var gl=document.getElementById("Glucks");
+gl.innerText=username + "!";
+
+//Timer
+let Timer=document.getElementById("timer");
+function SetTimer(){
+    let count=0;
+    setInterval(function(){
+     if(count<60){
+    if(count<10)
+        Timer.innerText="00:0" +count;
+      else{
+          Timer.innerText="00:" +count;
+      }
+      count++;  
+   }
+   else{
+    clearInterval(this); 
+    Timer.innerText="00:00"
+   }
+
+    },1000);
+};
+SetTimer();
+
+
 
 //Question Class
 class Question{

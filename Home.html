@@ -6,6 +6,7 @@
     <title>Examinatin System</title>
     <link rel="icon" type="image/png" href="images/audit.png">
     <link rel="Stylesheet" href="style.css">
+    
 
 </head>
 <body id="HomeBody">
@@ -16,7 +17,7 @@
     <tr>
         <td id="home">
             <div id="welcome">
-                <h2>
+                <h2 >
                     Welcome to my <span>Examination System</span>
                     <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="29">
                 </h2>
@@ -28,10 +29,12 @@
                     </label>
                     <br>
                     <input type="text"  id="username">
+                    <br>
+                    <label id="noNameLbl" style="color: red; font-weight: bold;"></label>
                 </form>
             </div>
             <div id="start">
-                <button>Start</button>
+                <button id="startbtn">Start</button>
             </div>
         </td>
         <td>
@@ -39,5 +42,28 @@
         </td>
     </tr>
    </table>
+   <script >
+
+        let startbtn = document.getElementById("startbtn");
+        let user = document.getElementById("username");
+        let noname=document.getElementById("noNameLbl");
+
+        startbtn.onclick = function() {
+            
+            let username = user.value;
+            if (username.length < 3) {
+                noname.innerText="Enter a valid name";
+                user.style.border = "1px solid red";
+                event.preventDefault();
+            
+            } else {
+                
+                localStorage.setItem('username', username);  
+                window.location.href = "index.html";
+            
+            }
+        };
+
+   </script>
 </body>
 </html>
