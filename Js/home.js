@@ -1,3 +1,4 @@
+
 history.pushState(null, "", location.href);
 window.onpopstate = function () {
   history.go(1);
@@ -18,15 +19,15 @@ user.addEventListener("input",function(){
 startbtn.onclick = function() {
     
     let username = user.value;
-    if (username.length < 3) {
-        noname.innerText="Enter a valid name";
-        user.style.border = "1px solid red";
-        event.preventDefault();
-    
-    } else {
+    if (username.length > 3) {
         
         localStorage.setItem('username', username);  
         window.location.href = "index.html";
+    
+    } else {
+        noname.innerText="Enter a valid name";
+        user.style.border = "1px solid red";
+        
     
     }
 };
