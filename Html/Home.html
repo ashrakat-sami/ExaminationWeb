@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Examinatin System</title>
     <link rel="icon" type="image/png" href="images/audit.png">
-    <link rel="Stylesheet" href="style.css">
+    <link rel="stylesheet" href="../Css/style.css">
     
 
 </head>
-<body id="HomeBody">
+<body id="HomeBody" >
     <div id="nav">
         <p>Examinatin System</p>
     </div >
@@ -38,31 +38,12 @@
             </div>
         </td>
         <td>
-            <img src="images/college entrance exam-pana.png" width="530px" height="550px" id="himg">
+            <img src="../images/college entrance exam-pana.png" width="530px" height="550px" id="himg">
         </td>
     </tr>
    </table>
-   <script >
+   <script src="../Js/home.js">
 
-        let startbtn = document.getElementById("startbtn");
-        let user = document.getElementById("username");
-        let noname=document.getElementById("noNameLbl");
-
-        startbtn.onclick = function() {
-            
-            let username = user.value;
-            if (username.length < 3) {
-                noname.innerText="Enter a valid name";
-                user.style.border = "1px solid red";
-                event.preventDefault();
-            
-            } else {
-                
-                localStorage.setItem('username', username);  
-                window.location.href = "index.html";
-            
-            }
-        };
 
    </script>
 </body>

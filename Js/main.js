@@ -3,6 +3,8 @@ let username = localStorage.getItem('username');
 var gl=document.getElementById("Glucks");
 gl.innerText=username + "!";
 
+
+
 //Timer
 let Timer=document.getElementById("timer");
 function SetTimer(){
@@ -19,6 +21,7 @@ function SetTimer(){
    else{
     clearInterval(this); 
     Timer.innerText="00:00"
+    CalculateProgress();
    }
 
     },1000);
@@ -149,7 +152,7 @@ function nextQuestion()
         if(Qnum<11){           
             used.push(Qindex);
             Qtitle.innerHTML=Qnum+"-"+examQuestions[Qindex].title;
-            Qimg.src = "images/"+examQuestions[Qindex].image; 
+            Qimg.src = "../images/"+examQuestions[Qindex].image; 
             Qchoice1.innerHTML=examQuestions[Qindex].choices[0];
             Qchoice2.innerHTML=examQuestions[Qindex].choices[1];
             Qchoice3.innerHTML=examQuestions[Qindex].choices[2];
@@ -163,16 +166,9 @@ function nextQuestion()
 
                 nxtbtn.innerText="Finish";
                 Qnum=1; 
-                nxtbtn.onclick=function(){
-                   // window.location.href = "Home.html";    //Need to change
-                  let score=0;
-                   for (let i = 0; i < examUserAns.length; i++) {
-                    if (examUserAns[i] === correctAnswers[i]) {
-                        score++;
-                    }
-                }
-                alert("Your score: " + score + " out of " + 10)
-                }
+                nxtbtn.onclick=CalculateProgress;
+                  
+                
             }
         }
     }else
@@ -207,10 +203,21 @@ function UserChoice(){
         Qchoice2.style.backgroundColor="white"
         Qchoice1.style.backgroundColor="white"
         examUserAns[used.length - 1] = userAns;
-    }
-    
-    
+    }   
+   
 }
+//Calculate Progress
+function CalculateProgress(){
+     
+     let score=0;
+     for (let i = 0; i < examUserAns.length; i++) {
+      if (examUserAns[i] === correctAnswers[i]) {
+          score++;
+      }
+  }
+  localStorage.setItem('score', score);  
 
-
+  window.location.href = "progress.html"; 
+ 
+}
 
