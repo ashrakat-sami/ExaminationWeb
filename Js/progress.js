@@ -1,18 +1,18 @@
 window.onload = function () {
     let score = localStorage.getItem('score') || 0;
     let Congrats = document.getElementById("Gluckh");
-    let percentage = (score / 10) * 100; // نسبة النجاح بناءً على الدرجة
+    let percentage = (score / 10) * 100;
     let percent = document.getElementById("number");
-    let circle = document.querySelector("circle"); // احصل على العنصر الصحيح
-
+    let circle = document.querySelector("circle"); 
+    let finalScore=document.getElementById("finalScore")
     if (score >= 5) {
-        Congrats.innerText = "Congratulations!";
+        Congrats.innerText = "You got it🎉";
         Congrats.style.color = "Green";
     } else {
-        Congrats.innerText = "Hard Luck!";
+        Congrats.innerText = "Almost there! Try again";
         Congrats.style.color = "red";
     }
-
+    finalScore.innerHTML=`You've got ${score} out of 10`;
     let counter = 0;
     let interval = setInterval(() => {
         if (counter >= percentage) {
@@ -21,7 +21,7 @@ window.onload = function () {
             counter++;
             percent.innerHTML = `${counter}%`;
 
-            let offset = 450 * (1 - counter / 100); // تحديث القيمة بناءً على النسبة
+            let offset = 450 * (1 - counter / 100);
             circle.style.strokeDashoffset = offset;
         }
     }, 25);

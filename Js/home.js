@@ -1,6 +1,19 @@
+history.pushState(null, "", location.href);
+window.onpopstate = function () {
+  history.go(1);
+};
+
 let startbtn = document.getElementById("startbtn");
 let user = document.getElementById("username");
 let noname=document.getElementById("noNameLbl");
+
+user.addEventListener("input",function(){
+    if(user.value.length>0){
+        startbtn.removeAttribute("disabled");
+    }else{
+        startbtn.setAttribute("disabled",true);
+    }
+});
 
 startbtn.onclick = function() {
     

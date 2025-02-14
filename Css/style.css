@@ -90,11 +90,14 @@ padding-bottom: 2px;
     font-weight: bold;
     box-shadow: 2px 2px 5px rgba(21, 31, 72, 0.5);
 }
-#start button:hover{
-    background-color: #536889;
-    cursor: pointer;
-
+#start button:disabled{
+    cursor: not-allowed;
 }
+#start button:enabled:hover{
+    background-color: #536889;  
+    cursor: pointer;
+}
+
 /**********************************************************************************************************************/
 #Gluckh{
     margin: 45px;
@@ -159,7 +162,11 @@ width: 90px;
 margin-left:800px ;
 font-weight: bold;
 }
-#next:hover{
+#next:disabled{
+    cursor: not-allowed;
+}
+
+#next:enabled:hover{
     background-color: rgb(89, 89, 246);
     cursor: pointer;
     width: 100px;
@@ -231,3 +238,9 @@ svg {
     height: 100%;
     z-index: 1;
 }
+#finalScore{
+    font-size: x-large;
+    font-weight: bolder;
+    margin-top: 25px;
+    margin-left: 80px;
+} 

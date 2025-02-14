@@ -1,3 +1,8 @@
+history.pushState(null, "", location.href);
+window.onpopstate = function () {
+  history.go(1);
+};
+
 //Wishimg Good luck to the user
 let username = localStorage.getItem('username');
 var gl=document.getElementById("Glucks");
@@ -49,76 +54,85 @@ class Question{
 
 // Quiz Questions Array using Question class
 const examQuestions = [
+
     new Question(
         1, 
-        "What is the name of this animal?", 
-        "whale.jpg", 
-        ["Blue Whale", "Humpback Whale", "Sperm Whale"], 
-        "Blue Whale"
+        "What planet is shown in this image?", 
+        "mercury.jpg", 
+        ["Mercury", "Venus", "Mars"], 
+        "Mercury"
     ),
+
     new Question(
         2, 
-        "Which country's flag is this?", 
-        "japan-flag.jpg", 
-        ["China", "South Korea", "Japan"], 
-        "Japan"
+        "What planet is shown in this image?", 
+        "venus.jpeg", 
+        ["Venus", "Earth", "Mars"], 
+        "Venus"
     ),
+
     new Question(
         3, 
-        "What city is shown in this image?", 
-        "barcelona.jpg", 
-        ["Madrid", "Barcelona", "Valencia"], 
-        "Barcelona"
+        "What planet is shown in this image?", 
+        "earth.jpg", 
+        ["Earth", "Mars", "Jupiter"], 
+        "Earth"
     ),
+
     new Question(
         4, 
-        "What type of animal is this?", 
-        "lion.jpg", 
-        ["Tiger", "Lion", "Leopard"], 
-        "Lion"
-    ),
-    new Question(
-        5, 
-        "What type of landmark is this?", 
-        "pyramid.jpg", 
-        ["Castle", "Pyramid", "Tower"], 
-        "Pyramid"
-    ),
-    new Question(
-        6, 
-        "What planet is this?", 
+        "What planet is shown in this image?", 
         "mars.jpeg", 
-        ["Jupiter", "Mars", "Venus"], 
+        ["Mars", "Saturn", "Jupiter"], 
         "Mars"
     ),
+
+    new Question(
+        5, 
+        "What planet is shown in this image?", 
+        "jupiter.jpeg", 
+        ["Jupiter", "Uranus", "Neptune"], 
+        "Jupiter"
+    ),
+
+    new Question(
+        6, 
+        "What planet is shown in this image?", 
+        "saturn.jpeg", 
+        ["Saturn", "Neptune", "Uranus"], 
+        "Saturn"
+    ),
+
     new Question(
         7, 
-        "What is this country?", 
-        "eiffel_tower.jpeg", 
-         ["Germany", "France", "Italy"],
-        "France"
+        "What planet is shown in this image?", 
+        "uranus.jpg", 
+        ["Uranus", "Saturn", "Neptune"], 
+        "Uranus"
     ),
+
     new Question(
         8, 
-       "What is this a popular type of?",
-        "Taco.jpeg", 
-        ["Burger", "Taco", "Pizza"],
-        "Taco"
-        ),
+        "What planet is shown in this image?", 
+        "neptune.jpeg", 
+        ["Neptune", "Mars", "Venus"], 
+        "Neptune"
+    ), 
     new Question(
         9, 
-        "What is this an example of?",
-        "sunflower.jpeg", 
-        ["Tree", "Flower", "Grass"],
-        "Flower"
+        "What is the name of this moon?", 
+        "titan.jpeg", 
+        ["Titan", "Europa", "Io"], 
+        "Titan"
     ),
     new Question(
-        10, 
-        "What mountain is this?", 
-        "everest.jpeg", 
-        ["K2", "Mount Everest", "Mount Kilimanjaro"], 
-        "Mount Everest"
+        9, 
+        "What type of celestial body is this?", 
+        "black_hole.jpg", 
+        ["Planet", "Star", "Black Hole"], 
+        "Black Hole"
     )
+
 ];
 
 let nxtbtn=document.getElementById("next");
@@ -136,12 +150,15 @@ let used=[]; //1,2,3,4
 let examUserAns=[];
 let correctAnswers = []; 
 
+
 //to move to the next question or finish the exam
 function nextQuestion()
 {
     UserChoice();
   
     var Qindex=Math.floor(Math.random() * 10) ;
+    
+
    
     //let n = used.at(used.indexOf(Qindex)-1);
     if(!used.includes(Qindex)){
@@ -149,13 +166,39 @@ function nextQuestion()
        
        // console.log(user)
        
-        if(Qnum<11){           
+        if(Qnum<11){   
+                  
             used.push(Qindex);
             Qtitle.innerHTML=Qnum+"-"+examQuestions[Qindex].title;
             Qimg.src = "../images/"+examQuestions[Qindex].image; 
-            Qchoice1.innerHTML=examQuestions[Qindex].choices[0];
-            Qchoice2.innerHTML=examQuestions[Qindex].choices[1];
-            Qchoice3.innerHTML=examQuestions[Qindex].choices[2];
+
+            let used2=[]; //array to store choice index to randomize showing choices
+
+           /* var Cindex=Math.floor(Math.random() * 3) ;
+            used2.push(Cindex);
+            Qchoice1.innerHTML=examQuestions[Qindex].choices[Cindex];
+            do {
+                Cindex = Math.floor(Math.random() * 3);
+            } while (used2.includes(Cindex));
+            used2.push(Cindex);
+            Qchoice2.innerHTML=examQuestions[Qindex].choices[Cindex];
+            do {
+                Cindex = Math.floor(Math.random() * 3);
+            } while (used2.includes(Cindex));
+            Qchoice3.innerHTML=examQuestions[Qindex].choices[Cindex];*/
+
+            for (let i = 0; i < 3; i++) {
+                let Cindex;
+                do {
+                    Cindex = Math.floor(Math.random() * 3);
+                } while (used2.includes(Cindex));
+
+                used2.push(Cindex);
+                document.getElementById(`c${i + 1}`).innerHTML = examQuestions[Qindex].choices[Cindex];
+            }
+
+
+
             correctAnswers.push(examQuestions[Qindex].answer);
           
             Qnum++;
@@ -175,6 +218,7 @@ function nextQuestion()
     {
         nextQuestion();
     }
+    nxtbtn.setAttribute("disabled",true);
     
 };
 nextQuestion();
@@ -189,6 +233,7 @@ function UserChoice(){
         Qchoice2.style.backgroundColor="white"
         Qchoice3.style.backgroundColor="white"
         examUserAns[used.length - 1] = userAns;
+        nxtbtn.removeAttribute("disabled");
     }
     Qchoice2.onclick=function(){
         userAns=Qchoice2.innerText;
@@ -196,6 +241,8 @@ function UserChoice(){
         Qchoice1.style.backgroundColor="white"
         Qchoice3.style.backgroundColor="white"
         examUserAns[used.length - 1] = userAns;
+        nxtbtn.removeAttribute("disabled");
+
     }
     Qchoice3.onclick=function(){
         userAns=Qchoice3.innerText;
@@ -203,6 +250,8 @@ function UserChoice(){
         Qchoice2.style.backgroundColor="white"
         Qchoice1.style.backgroundColor="white"
         examUserAns[used.length - 1] = userAns;
+        nxtbtn.removeAttribute("disabled");
+
     }   
    
 }
