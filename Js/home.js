@@ -19,7 +19,7 @@ user.addEventListener("input",function(){
 startbtn.onclick = function() {
     
     let username = user.value;
-    if (username.length > 3) {
+    if (username.length > 2) {
         
         localStorage.setItem('username', username);  
         window.location.href = "Html/Question.html";
