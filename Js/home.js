@@ -22,7 +22,7 @@ startbtn.onclick = function() {
     if (username.length > 3) {
         
         localStorage.setItem('username', username);  
-        window.location.href = "index.html";
+        window.location.href = "Html/Question.html";
     
     } else {
         noname.innerText="Enter a valid name";
